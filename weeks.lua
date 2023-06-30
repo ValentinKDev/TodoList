@@ -7,6 +7,8 @@ local readingFun = require 'vkdev.plugins_config.TodoList.functions.reading_file
 local modifyFun = require 'vkdev.plugins_config.TodoList.functions.modify'
 local syntaxFun = require 'vkdev.plugins_config.TodoList.functions.syntax'
 local numDayEqFun = require 'vkdev.plugins_config.TodoList.functions.number_day_eq'
+local winFun = require 'vkdev.plugins_config.TodoList.window'
+local wins = require 'vkdev.plugins_config.TodoList.functions.windows'
 
 vim.api.nvim_set_hl(0, "red", {fg='#aa0000' ,bg='#202020'})
 vim.api.nvim_set_hl(0, "green", {fg='#00aa00'})
@@ -36,6 +38,10 @@ vim.cmd[[ match DayBranch /\s*\p✕.*\Z/ ]]
 
 vim.keymap.set("n", "<Leader>tn", ":TodoNew<CR>")
 vim.keymap.set("n", "<Leader>td", ":TodoDone<CR>")
+--vim.keymap.set("n", "<Leader>tw", ":TodoWindow<CR>")
+vim.keymap.set("n", "<Leader>tw", ":TestTd<CR>")
+--vim.keymap.set("n", "<Leader>tt", ":TodoWindowTest<CR>")
+vim.keymap.set("n", "<Leader>tt", ":TodoBorderWindow<CR>")
 
 function Is_Line_Number_DayStr(line)
 	local ret = false
