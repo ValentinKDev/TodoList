@@ -12,6 +12,8 @@ vim.api.nvim_set_hl(0, "red", {fg='#aa0000' ,bg='#202020'})
 vim.api.nvim_set_hl(0, "green", {fg='#00aa00'})
 vim.api.nvim_set_hl(0, "yellow", {fg='#707000'})
 vim.api.nvim_set_hl(0, "blue", {fg='#0070aa', bold=true})
+vim.api.nvim_set_hl(0, "blueTop", {fg='#0070aa', bold=true})
+vim.api.nvim_set_hl(0, "blueBot", {fg='#0070aa', bold=true})
 vim.api.nvim_set_hl(0, "grayToHide", {fg='#656565'})
 vim.api.nvim_set_hl(0, "yellow2", {fg='#bbaa00'})
 vim.api.nvim_set_hl(0, "yellow3", {fg='#988500'})
@@ -58,36 +60,26 @@ local function HideDay(dayNum)
 	syntaxFun.Hightlight_Str_In_Gray(dayTopStr)
 	syntaxFun.Hightlight_Str_In_Gray(dayStr)
 	syntaxFun.Hightlight_Str_In_Gray(dayBotStr)
-
 	syntaxFun.Fold_Between(dayStart, dayEnd)
 	print(dayStr)
 end
 
-local function Highlight_Current_Day_By_Num(dayNum)
-	local dayTopStr = numDayEqFun.Get_Day_Top_String(dayNum)
-	local dayStr = numDayEqFun.Get_Day_String(dayNum)
-	local dayBotStr = numDayEqFun.Get_Day_Bot_String(dayNum)
-	syntaxFun.Hightlight_Str_In_Blue(dayTopStr)
-	syntaxFun.Hightlight_Str_In_Blue(dayStr)
-	syntaxFun.Hightlight_Str_In_Blue(dayBotStr)
-end
 
 local function Move_Cursor_To_Current_Day_List(dayNum) 
 	local line = numDayEqFun.Get_Day_List_Start_Line(dayNum)
-	-- count column directly from a variable 
-	local column = 8
---	vim.api.nvim_win_set_cursor(0, {line, column})
+	local column = 13
+	vim.api.nvim_win_set_cursor(0, {line, column})
 end
 
 local function Handle_current_Day(dayNum)
-	Highlight_Current_Day_By_Num(dayNum)
+	syntaxFun.Highlight_Current_Day_By_Num(dayNum)
 	modifyFun.Current_Day_Outline_to_Bold(dayNum)
+	Move_Cursor_To_Current_Day_List(dayNum)
 end
 
 local function Hil(currentDay)
 	local dayNum = numDayEqFun.DayToNum(currentDay)
 	Handle_current_Day(dayNum)
-	Move_Cursor_To_Current_Day_List(dayNum)
 
 	if currentDay == "lundi" then
 	elseif currentDay == "mardi" then

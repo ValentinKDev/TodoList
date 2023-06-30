@@ -1,4 +1,5 @@
-local numDayEqFun = require 'vkdev.plugins_config.TodoList.functions.number_day_eq'
+local NumDayEqFun = require 'vkdev.plugins_config.TodoList.functions.number_day_eq'
+local SyntaxVar = require 'vkdev.plugins_config.TodoList.variables.syntax_variables'
 
 local function ReplaceCharacterAt(target_char, replacement_char, line)
 	local line_content = vim.api.nvim_buf_get_lines(0, line, line + 1, false)[1]
@@ -7,7 +8,7 @@ local function ReplaceCharacterAt(target_char, replacement_char, line)
 end
 
 local function Current_Day_Outline_to_Bold(dayNum)
-	local day_str_line = numDayEqFun.Get_Day_String_line(dayNum)
+	local day_str_line = NumDayEqFun.Get_Day_String_line(dayNum)
 	print("current day line = " .. day_str_line)
 	ReplaceCharacterAt('─', '━', day_str_line - 2)
 	ReplaceCharacterAt('┌', '┏', day_str_line - 2)
@@ -24,9 +25,9 @@ function NewTodo()
 	local end_of_branch = Is_Line_Number_DayStr(current_line + 2)
 	if end_of_branch == true then
 		ReplaceCharacterAt('└', '├', current_line - 1)
-		vim.api.nvim_buf_set_lines(0, current_line, current_line,false, {syntaxVar.end_branch_content})
+		vim.api.nvim_buf_set_lines(0, current_line, current_line,false, {SyntaxVar.end_branch_content})
 	else 
-		vim.api.nvim_buf_set_lines(0, current_line, current_line,false, {syntaxVar.new_branch_content})
+		vim.api.nvim_buf_set_lines(0, current_line, current_line,false, {SyntaxVar.new_branch_content})
 	end
 	vim.api.nvim_feedkeys("j", "n", false)
 	vim.api.nvim_feedkeys("A", "n", false)
