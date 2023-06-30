@@ -41,9 +41,9 @@ function OpenBorderedWindow()
 		table.insert(border_lines, "║" .. string.rep(" ", width + 2) .. "║")
 	end
 	table.insert(border_lines, "╚" .. string.rep("═", width + 2) .. "╝")
-	--vim.api.nvim_buf_set_lines(border_buf, 0, -1, false, border_lines)
 	vim.api.nvim_buf_set_lines(content_buf, 0, -1, false, border_lines)
 	local win = vim.api.nvim_open_win(content_buf, true, opts)
+	vim.api.nvim_win_set_option(win, 'winhl', 'Normal:Normal')
 end
 
 function OpenFileInWindow(file_path)
@@ -59,7 +59,10 @@ function OpenFileInWindow(file_path)
 		col = col,
 	}
 	local win = vim.api.nvim_open_win(content_buf, true, opts)
+	vim.api.nvim_command("highlight FloatBackground guibg=black")
+	vim.api.nvim_win_set_option(win, "winhighlight", "FloatBackground:NormalFloat")
 	vim.api.nvim_command("edit" .. file_path)
+	vim.api.nvim_win_set_option(win, 'winhl', 'Normal:Normal')
 end
 
 function TestTd()
