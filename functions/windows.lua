@@ -1,4 +1,5 @@
 local systemVar = require 'vkdev.plugins_config.TodoList.variables.basic_variables'
+local bufferFun = require 'vkdev.plugins_config.TodoList.functions.buffers'
 
 local border_buf_path = systemVar.todoPath .. "border_buf"
 local border_buf_name = border_buf_path
@@ -63,12 +64,27 @@ function OpenFileInWindow(file_path)
 	vim.api.nvim_win_set_option(win, "winhighlight", "FloatBackground:NormalFloat")
 	vim.api.nvim_command("edit" .. file_path)
 	vim.api.nvim_win_set_option(win, 'winhl', 'Normal:Normal')
+
 end
 
 function TestTd()
 	OpenBorderedWindow()
 	OpenFileInWindow(systemVar.nextTodoPath) 
 end
+
+function CloseBorderIfFloatingWin()
+	local is_buf_floating_win = bufferFun.IsCurrentBuffer(systemVar.nextTodoPath)
+	if is_buf_floating_win then
+		local bufNr = bufferFun.GetBufferIdByName(border_buf_name)
+		vim.api.nvim_buf_delete(bufNr, { force = true })	
+	end
+end
+
+vim.cmd [[augroup custom_todo_file_quiting]]
+vim.cmd [[autocmd!]]
+vim.cmd [[autocmd BufLeave * lua CloseBorderIfFloatingWin()]]
+vim.cmd [[autocmd BufLeave, BufWinLeave, BufWipeout next setfiletype monthtodo]]
+vim.cmd [[augroup END]]
 
 vim.cmd[[ command! -nargs=0 TodoBorderWindow :lua OpenBorderedWindow()]]
 vim.cmd[[ command! -nargs=0 TestTd :lua TestTd()]]
