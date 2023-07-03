@@ -1,3 +1,4 @@
+local systemVar = require 'vkdev.plugins_config.TodoList.variables.basic_variables'
 local NumDayEqFun = require 'vkdev.plugins_config.TodoList.functions.number_day_eq'
 local SyntaxVar = require 'vkdev.plugins_config.TodoList.variables.syntax_variables'
 
@@ -42,8 +43,28 @@ function BranchDone()
 	vim.api.nvim_win_set_cursor(0, cursor_pos)
 end
 
+local function TemplateInsert(sourceFile, startLineNumber)
+	local file = io.open(sourceFile, "r")
+	if not sourceFile then
+		print("Failed to open source file: " .. sourceFile)
+		return
+	end
+	local line_count = 1
+	for line in file:lines() do
+		line_count = line_count + 1
+		local lineNumber = startLineNumber + line_count
+		vim.api.nvim_buf_set_lines(0, lineNumber , lineNumber, false, {line})
+	end
+	file:close()
+end
+
+function DayWeekTemplateInsert()
+	TemplateInsert(systemVar.dayTemplate, 10)
+end
+
 vim.cmd[[ command! -nargs=0 TodoNew :lua NewTodo() ]]
 vim.cmd[[ command! -nargs=0 TodoDone :lua  BranchDone()]]
+vim.cmd[[ command! -nargs=0 TodoDayTemplate :lua DayWeekTemplateInsert()]]
 
 return {
 	ReplaceCharacterAt = ReplaceCharacterAt,

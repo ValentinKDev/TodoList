@@ -7,7 +7,6 @@ local readingFun = require 'vkdev.plugins_config.TodoList.functions.reading_file
 local modifyFun = require 'vkdev.plugins_config.TodoList.functions.modify'
 local syntaxFun = require 'vkdev.plugins_config.TodoList.functions.syntax'
 local numDayEqFun = require 'vkdev.plugins_config.TodoList.functions.number_day_eq'
-local winFun = require 'vkdev.plugins_config.TodoList.window'
 local buffersFun = require 'vkdev.plugins_config.TodoList.functions.buffers'
 local wins = require 'vkdev.plugins_config.TodoList.functions.windows'
 
@@ -22,20 +21,20 @@ vim.api.nvim_set_hl(0, "yellow2", {fg='#bbaa00'})
 vim.api.nvim_set_hl(0, "yellow3", {fg='#988500'})
 vim.api.nvim_set_hl(0, "CursorLineNr", {bold=true, bg=Gray})
 
-vim.fn.matchadd("yellow2", "SEMAINE") 
-vim.fn.matchadd("yellow2", "#") 
-vim.fn.matchadd("yellow3", "═") 
-vim.fn.matchadd("yellow3", "║") 
-vim.fn.matchadd("yellow3", "╠") 
-vim.fn.matchadd("yellow3", "╔") 
-vim.fn.matchadd("yellow3", "╚") 
-vim.fn.matchadd("yellow3", "╗") 
-vim.fn.matchadd("yellow3", "╝") 
+vim.fn.matchadd("yellow2", "SEMAINE")
+vim.fn.matchadd("yellow2", "#")
+vim.fn.matchadd("yellow3", "═")
+vim.fn.matchadd("yellow3", "║")
+vim.fn.matchadd("yellow3", "╠")
+vim.fn.matchadd("yellow3", "╔")
+vim.fn.matchadd("yellow3", "╚")
+vim.fn.matchadd("yellow3", "╗")
+vim.fn.matchadd("yellow3", "╝")
 
 vim.cmd[[ hi Folded guifg=#656565 guibg=#282828 ]]
 vim.cmd[[ hi FoldColumn guibg=#050505 ]]
-vim.cmd[[ hi DayBranch guifg=#555555]]  			
-vim.cmd[[ match DayBranch /\s*\p✕.*\Z/ ]]  	
+vim.cmd[[ hi DayBranch guifg=#555555]]
+vim.cmd[[ match DayBranch /\s*\p✕.*\Z/ ]]
 
 vim.keymap.set("n", "<Leader>tn", ":TodoNew<CR>")
 vim.keymap.set("n", "<Leader>td", ":TodoDone<CR>")
@@ -44,8 +43,9 @@ vim.keymap.set("n", "<Leader>tw", ":TestTd<CR>")
 --vim.keymap.set("n", "<Leader>tt", ":TodoWindowTest<CR>")
 vim.keymap.set("n", "<Leader>tt", ":TodoBorderWindow<CR>")
 vim.keymap.set("n", "<Leader>tb", ":TodoBuffers<CR>")
+vim.keymap.set("n", "<Leader>te", ":TodoDayTemplate<CR>")
 
-
+--local ?
 function Is_Line_Number_DayStr(line)
 	local ret = false
 	if line == lineVar.day1Line then ret = true
