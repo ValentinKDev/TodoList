@@ -1,6 +1,6 @@
-local systemVar = require 'vkdev.plugins_config.TodoList.variables.basic_variables'
-local NumDayEqFun = require 'vkdev.plugins_config.TodoList.functions.number_day_eq'
-local SyntaxVar = require 'vkdev.plugins_config.TodoList.variables.syntax_variables'
+local systemVar = require 'vkdev.TodoList.variables.basic_variables'
+local NumDayEqFun = require 'vkdev.TodoList.functions.number_day_eq'
+local SyntaxVar = require 'vkdev.TodoList.variables.syntax_variables'
 
 local function ReplaceCharacterAt(target_char, replacement_char, line)
 	local line_content = vim.api.nvim_buf_get_lines(0, line, line + 1, false)[1]
@@ -36,7 +36,8 @@ end
 
 function BranchDone()
 	local target_char = '─'
-	local replacement_char = '✕'
+	--local replacement_char = '✕'
+	local replacement_char = '✔'
 	local cursor_pos = vim.api.nvim_win_get_cursor(0)
 	local current_line = cursor_pos[1] - 1
 	ReplaceCharacterAt(target_char, replacement_char, current_line )

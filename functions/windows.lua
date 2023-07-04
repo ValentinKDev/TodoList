@@ -1,5 +1,5 @@
-local systemVar = require 'vkdev.plugins_config.TodoList.variables.basic_variables'
-local bufferFun = require 'vkdev.plugins_config.TodoList.functions.buffers'
+local systemVar = require 'vkdev.TodoList.variables.basic_variables'
+local bufferFun = require 'vkdev.TodoList.functions.buffers'
 
 local border_buf_path = systemVar.todoPath .. "border_buf"
 local border_buf_name = border_buf_path

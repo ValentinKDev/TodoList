@@ -1,49 +1,14 @@
 print("todo syntax")
 
-local systemVar = require 'vkdev.plugins_config.TodoList.variables.basic_variables'
-local syntaxVar = require 'vkdev.plugins_config.TodoList.variables.syntax_variables'
-local lineVar = require 'vkdev.plugins_config.TodoList.variables.line_variables'
-local readingFun = require 'vkdev.plugins_config.TodoList.functions.reading_file'
-local modifyFun = require 'vkdev.plugins_config.TodoList.functions.modify'
-local syntaxFun = require 'vkdev.plugins_config.TodoList.functions.syntax'
-local numDayEqFun = require 'vkdev.plugins_config.TodoList.functions.number_day_eq'
-local buffersFun = require 'vkdev.plugins_config.TodoList.functions.buffers'
-local wins = require 'vkdev.plugins_config.TodoList.functions.windows'
+local systemVar = require 'vkdev.TodoList.variables.basic_variables'
+local lineVar = require 'vkdev.TodoList.variables.line_variables'
+local modifyFun = require 'vkdev.TodoList.functions.modify'
+local syntaxFun = require 'vkdev.TodoList.functions.syntax'
+local numDayEqFun = require 'vkdev.TodoList.functions.number_day_eq'
+local wins = require 'vkdev.TodoList.functions.windows'
 
-vim.api.nvim_set_hl(0, "red", {fg='#aa0000' ,bg='#202020'})
-vim.api.nvim_set_hl(0, "green", {fg='#00aa00'})
-vim.api.nvim_set_hl(0, "yellow", {fg='#707000'})
-vim.api.nvim_set_hl(0, "blue", {fg='#0070aa', bold=true})
-vim.api.nvim_set_hl(0, "blueTop", {fg='#0070aa', bold=true})
-vim.api.nvim_set_hl(0, "blueBot", {fg='#0070aa', bold=true})
-vim.api.nvim_set_hl(0, "grayToHide", {fg='#656565'})
-vim.api.nvim_set_hl(0, "yellow2", {fg='#bbaa00'})
-vim.api.nvim_set_hl(0, "yellow3", {fg='#988500'})
-vim.api.nvim_set_hl(0, "CursorLineNr", {bold=true, bg=Gray})
+vim.api.nvim_command('source ' .. systemVar.keymapLuaFilePath)
 
-vim.fn.matchadd("yellow2", "SEMAINE")
-vim.fn.matchadd("yellow2", "#")
-vim.fn.matchadd("yellow3", "═")
-vim.fn.matchadd("yellow3", "║")
-vim.fn.matchadd("yellow3", "╠")
-vim.fn.matchadd("yellow3", "╔")
-vim.fn.matchadd("yellow3", "╚")
-vim.fn.matchadd("yellow3", "╗")
-vim.fn.matchadd("yellow3", "╝")
-
-vim.cmd[[ hi Folded guifg=#656565 guibg=#282828 ]]
-vim.cmd[[ hi FoldColumn guibg=#050505 ]]
-vim.cmd[[ hi DayBranch guifg=#555555]]
-vim.cmd[[ match DayBranch /\s*\p✕.*\Z/ ]]
-
-vim.keymap.set("n", "<Leader>tn", ":TodoNew<CR>")
-vim.keymap.set("n", "<Leader>td", ":TodoDone<CR>")
---vim.keymap.set("n", "<Leader>tw", ":TodoWindow<CR>")
-vim.keymap.set("n", "<Leader>tw", ":TestTd<CR>")
---vim.keymap.set("n", "<Leader>tt", ":TodoWindowTest<CR>")
-vim.keymap.set("n", "<Leader>tt", ":TodoBorderWindow<CR>")
-vim.keymap.set("n", "<Leader>tb", ":TodoBuffers<CR>")
-vim.keymap.set("n", "<Leader>te", ":TodoDayTemplate<CR>")
 
 --local ?
 function Is_Line_Number_DayStr(line)

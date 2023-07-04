@@ -1,5 +1,5 @@
-local SyntaxVar = require 'vkdev.plugins_config.TodoList.variables.syntax_variables'
-local LineVar = require 'vkdev.plugins_config.TodoList.variables.line_variables'
+local SyntaxVar = require 'vkdev.TodoList.variables.syntax_variables'
+local LineVar = require 'vkdev.TodoList.variables.line_variables'
 
 local function Get_Day_String_line(dayNum)
 	local line = ""

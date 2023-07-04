@@ -1,0 +1,6 @@
+vim.keymap.set("n", "<Leader>tn", ":TodoNew<CR>")
+vim.keymap.set("n", "<Leader>td", ":TodoDone<CR>")
+vim.keymap.set("n", "<Leader>tw", ":TestTd<CR>")
+vim.keymap.set("n", "<Leader>tt", ":TodoBorderWindow<CR>")
+vim.keymap.set("n", "<Leader>tb", ":TodoBuffers<CR>")
+vim.keymap.set("n", "<Leader>te", ":TodoDayTemplate<CR>")

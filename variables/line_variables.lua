@@ -1,5 +1,5 @@
-local readingFun = require 'vkdev.plugins_config.TodoList.functions.reading_file'
-local systemVar = require 'vkdev.plugins_config.TodoList.variables.basic_variables'
+local readingFun = require 'vkdev.TodoList.functions.reading_file'
+local systemVar = require 'vkdev.TodoList.variables.basic_variables'
 --local readingFun = ReadingFun()
 --local systemVar = SystemVar()
 local day1Line = readingFun.Find("- Lundi -", systemVar.weekTodoPath, 1)

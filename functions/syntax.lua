@@ -1,5 +1,33 @@
-local NumDayEqFun = require 'vkdev.plugins_config.TodoList.functions.number_day_eq'
+local NumDayEqFun = require 'vkdev.TodoList.functions.number_day_eq'
 
+vim.fn.matchadd("yellow2", "SEMAINE")
+vim.fn.matchadd("yellow2", "#")
+vim.fn.matchadd("yellow3", "═")
+vim.fn.matchadd("yellow3", "║")
+vim.fn.matchadd("yellow3", "╠")
+vim.fn.matchadd("yellow3", "╔")
+vim.fn.matchadd("yellow3", "╚")
+vim.fn.matchadd("yellow3", "╗")
+vim.fn.matchadd("yellow3", "╝")
+
+vim.api.nvim_set_hl(0, "red", {fg='#aa0000' ,bg='#202020'})
+vim.api.nvim_set_hl(0, "green", {fg='#00aa00'})
+vim.api.nvim_set_hl(0, "yellow", {fg='#707000'})
+vim.api.nvim_set_hl(0, "blue", {fg='#0070aa', bold=true})
+vim.api.nvim_set_hl(0, "blueTop", {fg='#0070aa', bold=true})
+vim.api.nvim_set_hl(0, "blueBot", {fg='#0070aa', bold=true})
+vim.api.nvim_set_hl(0, "grayToHide", {fg='#656565'})
+vim.api.nvim_set_hl(0, "yellow2", {fg='#bbaa00'})
+vim.api.nvim_set_hl(0, "yellow3", {fg='#988500'})
+vim.api.nvim_set_hl(0, "CursorLineNr", {bold=true, bg=Gray})
+
+vim.cmd[[ hi Folded guifg=#656565 guibg=#282828 ]]
+vim.cmd[[ hi FoldColumn guibg=#050505 ]]
+vim.cmd[[ hi DayBranch guifg=#555555]]
+--vim.cmd[[ match DayBranch /\s*\p✕.*\Z/ ]]
+vim.cmd[[ match DayBranch /\s*\p✔.*\Z/ ]]
+
+--local ?
 local function Hightlight_Str_In_Gray(str) 
 	vim.fn.matchadd("grayToHide", str) 
 end

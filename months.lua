@@ -10,5 +10,6 @@ function Truc2()
 --	vim.cmd([[ hi RealisedBranch guifg=#258050]])	
 	vim.cmd([[ match RealisedBranch /\s*\p✔.*\Z/ ]])
 end
-Truc1()
+--Truc1()
+print("init months.lua")
 
