@@ -23,7 +23,7 @@ local function Find(word, filepath, start_line)
 	return line_number
 end
 
-function Find_word_in_string_from_line(word, input_string, start_line)
+local function Find_word_in_string_from_line(word, input_string, start_line)
 	local line_count = 1
 	for line in input_string:gmatch("[^\r\n]+") do
 		if line_count >= start_line then
@@ -34,6 +34,26 @@ function Find_word_in_string_from_line(word, input_string, start_line)
 		line_count = line_count + 1
 	end
 	return false
+end
+
+local function GetLineFromFile(filePath, theLine)
+	local file = io.open(filePath, "r")
+	if not file then
+		print("File not found: " .. filePath)
+		return ""
+	end
+
+	local currentLineNr = 1
+	for line in file:lines() do
+        if currentLineNr == theLine then
+			file:close()
+            return line
+        end
+        currentLineNr = currentLineNr + 1
+    end
+	file:close()
+    error("Not enough lines in file!")
+	return ""
 end
 
 return {

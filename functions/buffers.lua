@@ -34,7 +34,6 @@ function GetBufferIdByName(bufferName)
 	local retNr = -1
 	for _, bufNr in ipairs(vim.api.nvim_list_bufs()) do
 		local name = vim.api.nvim_buf_get_name(bufNr)
-		print("name : " .. name)
         if name == bufferName then
 			retNr = bufNr	
         end
