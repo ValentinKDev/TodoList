@@ -67,16 +67,21 @@ function OpenFileInWindow(file_path)
 
 end
 
-function TestTd()
+function OpenWindowForListOfTodoThing()
 	OpenBorderedWindow()
-	OpenFileInWindow(systemVar.nextTodoPath) 
+	OpenFileInWindow(systemVar.nextTodoPath)
+end
+
+function OpenWindowHelpTodoCommands()
+	OpenBorderedWindow()
+	OpenFileInWindow(systemVar.keymapLuaFilePath)
 end
 
 function CloseBorderIfFloatingWin()
 	local is_buf_floating_win = bufferFun.IsCurrentBuffer(systemVar.nextTodoPath)
 	if is_buf_floating_win then
 		local bufNr = bufferFun.GetBufferIdByName(border_buf_name)
-		vim.api.nvim_buf_delete(bufNr, { force = true })	
+		vim.api.nvim_buf_delete(bufNr, { force = true })
 	end
 end
 
@@ -87,4 +92,6 @@ vim.cmd [[autocmd BufLeave, BufWinLeave, BufWipeout next setfiletype monthtodo]]
 vim.cmd [[augroup END]]
 
 vim.cmd[[ command! -nargs=0 TodoBorderWindow :lua OpenBorderedWindow()]]
-vim.cmd[[ command! -nargs=0 TestTd :lua TestTd()]]
+vim.cmd[[ command! -nargs=0 OpenListTodoThings :lua OpenWindowForListOfTodoThing()]]
+vim.cmd[[ command! -nargs=0 OpenHelpWindow :lua OpenWindowHelpTodoCommands()]]
+vim.cmd[[ command! -nargs=0 TodoHelp :lua TodoHelp()]]
