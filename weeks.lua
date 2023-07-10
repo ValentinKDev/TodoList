@@ -8,6 +8,8 @@ local numDayEqFun = require 'vkdev.TodoList.functions.number_day_eq'
 local wins = require 'vkdev.TodoList.functions.windows'
 
 vim.api.nvim_command('source ' .. systemVar.keymapLuaFilePath)
+vim.api.nvim_command('source ' .. systemVar.templateInsertLuaFilePath)
+--vim.api.nvim_command('source /home/vkdev/.config/nvim/lua/vkdev/TodoList/functions/modify/template_insertion.lua')
 
 
 --local ?

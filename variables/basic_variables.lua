@@ -7,6 +7,8 @@ local TodoPlugPath = "/home/vkdev/.config/nvim/lua/vkdev/TodoList/"
 local keymapLuaFilePath = TodoPlugPath .. "keymap.lua"
 local weekLuaFilePath = TodoPlugPath .. "weeks.lua"
 local monthLuaFilePath = TodoPlugPath .. "months.lua"
+local modifyLuaDirPath = TodoPlugPath .. "functions/modify/"
+local templateInsertLuaFilePath = modifyLuaDirPath .. "template.lua"
 
 local weekDay = os.date("%A")
 print("weekDay : " .. weekDay)
@@ -52,4 +54,5 @@ return {
 	keymapLuaFilePath = keymapLuaFilePath,
 	weekLuaFilePath = weekLuaFilePath,
 	monthLuaFilePath = monthLuaFilePath,
+	templateInsertLuaFilePath = templateInsertLuaFilePath,
 }
