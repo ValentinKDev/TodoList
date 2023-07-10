@@ -25,6 +25,9 @@ local function WeekTemplateInsert(dayNrInTheWeek, dayNrInTheMonth, monthNr)
 	file:close()
 
 	local startNr = dayNrInTheMonth - (dayNrInTheWeek - 1)
+	print("startNr : " .. startNr)
+	print("dayMonth : " .. dayNrInTheMonth)
+	print("dayNrInTheWeek : " .. dayNrInTheWeek)
 	local startStr = ""
 	local minusMonth = false
 	if startNr < 10 then
@@ -37,7 +40,6 @@ local function WeekTemplateInsert(dayNrInTheWeek, dayNrInTheMonth, monthNr)
 		startStr = startNr
 	end
 	modifyLineFun.ReplaceStrAt("XX", startStr, 15)
-	print("startNr : " .. startNr)
 
 	local startMonth = minusMonth and numMonthEqFun.GetMonthName(monthNr) or monthName
 --	print("monthNr : " .. monthNr)
@@ -67,7 +69,6 @@ local function WeekTemplateInsert(dayNrInTheWeek, dayNrInTheMonth, monthNr)
 	else
 		endStr = endNr
 	end
-	print("endStr : " .. endStr)
 	modifyLineFun.ReplaceStrAt("YY", endStr, 15)
 	local endMonth = plusMonth and numMonthEqFun.GetMonthName(tonumber(monthNr) + 1) or monthName
 	modifyLineFun.ReplaceStrAt("mmmmm", endMonth, 15)
@@ -105,13 +106,13 @@ function NextWeekTemplate()
 	local dayNrInTheWeek = systemVar.dayNrInTheWeek
 	local dayNrInTheMonth = systemVar.dayNrInTheMonth
 	local monthNr = systemVar.monthNr
-	local startDayInTheMonth = dayNrInTheMonth - dayNrInTheWeek + 7
-	if startDayInTheMonth > numMonthEqFun.GetMonthMaxDays(monthNr) then
+	local nextWeekStartDayInTheMonth = dayNrInTheMonth - dayNrInTheWeek + 1 + 7
+	if nextWeekStartDayInTheMonth > numMonthEqFun.GetMonthMaxDays(tonumber(monthNr)) then
 		monthNr = monthNr - 1
-		dayNrInTheMonth = numMonthEqFun.GetMonthMaxDays(monthNr) + startDayInTheMonth
+		dayNrInTheMonth = numMonthEqFun.GetMonthMaxDays(tonumber(monthNr)) + nextWeekStartDayInTheMonth
 	end
 
-	WeekTemplateInsert(systemVar.dayNrInTheWeek, systemVar.dayNrInTheMonth, systemVar.monthNr)
+	WeekTemplateInsert(dayNrInTheWeek, nextWeekStartDayInTheMonth, monthNr)
 end
 
 function ThisWeekTemplate()
