@@ -1,14 +1,10 @@
-local readingFun = require 'vkdev.TodoList.functions.reading_file'
-local systemVar = require 'vkdev.TodoList.variables.basic_variables'
---local readingFun = ReadingFun()
---local systemVar = SystemVar()
-local day1Line = readingFun.Find("- Lundi -", systemVar.weekTodoPath, 1)
-local day2Line = readingFun.Find("- Mardi -", systemVar.weekTodoPath, 1)
-local day3Line = readingFun.Find("- Mercredi -", systemVar.weekTodoPath, 1)
-local day4Line = readingFun.Find("- Jeudi -", systemVar.weekTodoPath, 1)
-local day5Line = readingFun.Find("- Vendredi -", systemVar.weekTodoPath, 1)
-local day6Line = readingFun.Find("- Samedi -", systemVar.weekTodoPath, 1)
-local day7Line = readingFun.Find("- Dimanche -", systemVar.weekTodoPath, 1)
+local day1Line = _ReadFun.Find("- Lundi -", _SystemVar.weekTodoPath, 1)
+local day2Line = _ReadFun.Find("- Mardi -", _SystemVar.weekTodoPath, 1)
+local day3Line = _ReadFun.Find("- Mercredi -", _SystemVar.weekTodoPath, 1)
+local day4Line = _ReadFun.Find("- Jeudi -", _SystemVar.weekTodoPath, 1)
+local day5Line = _ReadFun.Find("- Vendredi -", _SystemVar.weekTodoPath, 1)
+local day6Line = _ReadFun.Find("- Samedi -", _SystemVar.weekTodoPath, 1)
+local day7Line = _ReadFun.Find("- Dimanche -", _SystemVar.weekTodoPath, 1)
 
 local day1LineStart = day1Line + 2
 local day2LineStart = day2Line + 2

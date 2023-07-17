@@ -1,6 +1,14 @@
 local new_branch_content = "║    ├─ "
 local end_branch_content = "║    └─ "
 
+local day1="- Lundi -"
+local day2="- Mardi -"
+local day3="- Mercredi -"
+local day4="- Jeudi -"
+local day5="- Vendredi -"
+local day6="- Samedi -"
+local day7="- Dimanche -"
+local day8="╚══════════════════════════════════════════════════════════════════════════════════════════════════╝"
 local day1_Middle="┃ - Lundi - ┃"
 local day2_Middle="┃ - Mardi - ┃"
 local day3_Middle="┃ - Mercredi - ┃"
@@ -48,6 +56,13 @@ return {
 	new_branch_content = new_branch_content,
 	end_branch_content = end_branch_content,
 
+	day1 = day1,
+	day2 = day2,
+	day3 = day3,
+	day4 = day4,
+	day5 = day5,
+	day6 = day6,
+	day7 = day7,
 	day1_Middle = day1_Middle,
 	day2_Middle = day2_Middle,
 	day3_Middle = day3_Middle,

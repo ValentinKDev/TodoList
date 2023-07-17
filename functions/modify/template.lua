@@ -1,14 +1,15 @@
-local numMonthEqFun = require 'vkdev.TodoList.functions.number_month_eq'
-local systemVar = require 'vkdev.TodoList.variables.basic_variables'
-local modifyLineFun = require 'vkdev.TodoList.functions.modify.line'
+print("load functions/modify/template.lua")
+--local _NumMonthEqFun = require 'vkdev.TodoList.functions.number_month_eq'
+--local _SystemVar = require 'vkdev.TodoList.variables.basic_variables'
+--local _ModifyLineFun = require 'vkdev.TodoList.functions.modify.line'
 
 -- [[
 -- Function to insert a new week day by day template and fill or replace "XX" "MMMM" "|" ";" "," 
 -- elements by an accurate date and an elegante presentation
 -- ]]
 local function WeekTemplateInsert(dayNrInTheWeek, dayNrInTheMonth, monthNr)
-	local weekTemplate = systemVar.weekTemplate
-	local monthName = systemVar.monthName
+	local weekTemplate = _SystemVar.weekTemplate
+	local monthName = _SystemVar.monthName
 
 	local file = io.open(weekTemplate, "r")
 	if not weekTemplate then
@@ -34,17 +35,17 @@ local function WeekTemplateInsert(dayNrInTheWeek, dayNrInTheMonth, monthNr)
 		startStr = "0" .. startNr
 	elseif startNr < 1 then
 		minusMonth = true
-		startNr = numMonthEqFun.GetMonthMaxDays(monthNr - 1)
+		startNr = _NumMonthEqFun.GetMonthMaxDays(monthNr - 1)
 		startStr = startNr
 	else
 		startStr = startNr
 	end
-	modifyLineFun.ReplaceStrAt("XX", startStr, 15)
+	_ModifyLineFun.ReplaceStrAt("XX", startStr, 15)
 
-	local startMonth = minusMonth and numMonthEqFun.GetMonthName(monthNr) or monthName
+	local startMonth = minusMonth and _NumMonthEqFun.GetMonthName(monthNr) or monthName
 --	print("monthNr : " .. monthNr)
 --	print("startmonth len : " .. startMonth:len())
-	modifyLineFun.ReplaceStrAt("MMMMM", startMonth, 15)
+	_ModifyLineFun.ReplaceStrAt("MMMMM", startMonth, 15)
 
 	local nrStartSyntax = "━"
 	local i = 0
@@ -53,8 +54,8 @@ local function WeekTemplateInsert(dayNrInTheWeek, dayNrInTheMonth, monthNr)
 		nrStartSyntax = nrStartSyntax .. "━"
 		i = i + 1
 	end
-	modifyLineFun.ReplaceStrAt(";", nrStartSyntax, 14)
-	modifyLineFun.ReplaceStrAt(";", nrStartSyntax, 16)
+	_ModifyLineFun.ReplaceStrAt(";", nrStartSyntax, 14)
+	_ModifyLineFun.ReplaceStrAt(";", nrStartSyntax, 16)
 
 
 	local plusMonth = false
@@ -62,16 +63,16 @@ local function WeekTemplateInsert(dayNrInTheWeek, dayNrInTheMonth, monthNr)
 	local endStr = ""
 	if endNr < 10 then
 		endStr = "0" .. endNr
-	elseif endNr > numMonthEqFun.GetMonthMaxDays(tonumber(monthNr)) then
+	elseif endNr > _NumMonthEqFun.GetMonthMaxDays(tonumber(monthNr)) then
 		plusMonth = true
-		endNr = endNr - numMonthEqFun.GetMonthMaxDays(tonumber(monthNr))
+		endNr = endNr - _NumMonthEqFun.GetMonthMaxDays(tonumber(monthNr))
 		endStr = endNr
 	else
 		endStr = endNr
 	end
-	modifyLineFun.ReplaceStrAt("YY", endStr, 15)
-	local endMonth = plusMonth and numMonthEqFun.GetMonthName(tonumber(monthNr) + 1) or monthName
-	modifyLineFun.ReplaceStrAt("mmmmm", endMonth, 15)
+	_ModifyLineFun.ReplaceStrAt("YY", endStr, 15)
+	local endMonth = plusMonth and _NumMonthEqFun.GetMonthName(tonumber(monthNr) + 1) or monthName
+	_ModifyLineFun.ReplaceStrAt("mmmmm", endMonth, 15)
 
 	local nrEndSyntax = "━"
 	i = 0
@@ -80,8 +81,8 @@ local function WeekTemplateInsert(dayNrInTheWeek, dayNrInTheMonth, monthNr)
 		nrEndSyntax = nrEndSyntax .. "━"
 		i = i + 1
 	end
-	modifyLineFun.ReplaceStrAt(",", nrStartSyntax, 14)
-	modifyLineFun.ReplaceStrAt(",", nrStartSyntax, 16)
+	_ModifyLineFun.ReplaceStrAt(",", nrStartSyntax, 14)
+	_ModifyLineFun.ReplaceStrAt(",", nrStartSyntax, 16)
 
 	local nrMidSyntax = ""
 	local nrBotEndSyntax = ""
@@ -95,28 +96,28 @@ local function WeekTemplateInsert(dayNrInTheWeek, dayNrInTheMonth, monthNr)
 		nrTopEndSyntax = nrTopEndSyntax .. ":"
 		i = i + 1
 	end
-	modifyLineFun.ReplaceStrAt("|", nrTopEndSyntax, 14)
-	modifyLineFun.ReplaceStrAt("|", nrMidSyntax, 15)
-	modifyLineFun.ReplaceStrAt("|", nrBotEndSyntax, 16)
+	_ModifyLineFun.ReplaceStrAt("|", nrTopEndSyntax, 14)
+	_ModifyLineFun.ReplaceStrAt("|", nrMidSyntax, 15)
+	_ModifyLineFun.ReplaceStrAt("|", nrBotEndSyntax, 16)
 	
 	vim.api.nvim_win_set_cursor(0, {15,0})
 end
 
 function NextWeekTemplate()
-	local dayNrInTheWeek = systemVar.dayNrInTheWeek
-	local dayNrInTheMonth = systemVar.dayNrInTheMonth
-	local monthNr = systemVar.monthNr
+	local dayNrInTheWeek = _SystemVar.dayNrInTheWeek
+	local dayNrInTheMonth = _SystemVar.dayNrInTheMonth
+	local monthNr = _SystemVar.monthNr
 	local nextWeekStartDayInTheMonth = dayNrInTheMonth - dayNrInTheWeek + 1 + 7
-	if nextWeekStartDayInTheMonth > numMonthEqFun.GetMonthMaxDays(tonumber(monthNr)) then
+	if nextWeekStartDayInTheMonth > _NumMonthEqFun.GetMonthMaxDays(tonumber(monthNr)) then
 		monthNr = monthNr - 1
-		dayNrInTheMonth = numMonthEqFun.GetMonthMaxDays(tonumber(monthNr)) + nextWeekStartDayInTheMonth
+		dayNrInTheMonth = _NumMonthEqFun.GetMonthMaxDays(tonumber(monthNr)) + nextWeekStartDayInTheMonth
 	end
 
 	WeekTemplateInsert(dayNrInTheWeek, nextWeekStartDayInTheMonth, monthNr)
 end
 
 function ThisWeekTemplate()
-	WeekTemplateInsert(systemVar.dayNrInTheWeek, systemVar.dayNrInTheMonth, systemVar.monthNr)
+	WeekTemplateInsert(_SystemVar.dayNrInTheWeek, _SystemVar.dayNrInTheMonth, _SystemVar.monthNr)
 end
 
 vim.cmd[[ command! -nargs=0 TodoThisWeekTemplate :lua ThisWeekTemplate()]]

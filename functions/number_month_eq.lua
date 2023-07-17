@@ -1,3 +1,5 @@
+print("load functions/numer_month_eq.lua")
+
 local function GetMonthMaxDays(monthNr)
 	local maxDays = -1
 	if monthNr == 1 then maxDays = 31

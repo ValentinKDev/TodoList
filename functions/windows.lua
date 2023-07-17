@@ -1,7 +1,7 @@
-local systemVar = require 'vkdev.TodoList.variables.basic_variables'
-local bufferFun = require 'vkdev.TodoList.functions.buffers'
+--local _SystemVar = require 'vkdev.TodoList.variables.basic_variables'
+--local _BufferFun = require 'vkdev.TodoList.functions.buffers'
 
-local border_buf_path = systemVar.todoPath .. "border_buf"
+local border_buf_path = _SystemVar.todoPath .. "border_buf"
 local border_buf_name = border_buf_path
 
 local calcul_width = math.floor(vim.o.columns * 0.8)
@@ -69,18 +69,18 @@ end
 
 function OpenWindowForListOfTodoThing()
 	OpenBorderedWindow()
-	OpenFileInWindow(systemVar.nextTodoPath)
+	OpenFileInWindow(_SystemVar.nextTodoPath)
 end
 
 function OpenWindowHelpTodoCommands()
 	OpenBorderedWindow()
-	OpenFileInWindow(systemVar.keymapLuaFilePath)
+	OpenFileInWindow(_SystemVar.keymapLuaFilePath)
 end
 
 function CloseBorderIfFloatingWin()
-	local is_buf_floating_win = bufferFun.IsCurrentBuffer(systemVar.nextTodoPath)
+	local is_buf_floating_win = _BufferFun.IsCurrentBuffer(_SystemVar.nextTodoPath)
 	if is_buf_floating_win then
-		local bufNr = bufferFun.GetBufferIdByName(border_buf_name)
+		local bufNr = _BufferFun.GetBufferIdByName(border_buf_name)
 		vim.api.nvim_buf_delete(bufNr, { force = true })
 	end
 end

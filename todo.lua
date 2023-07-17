@@ -1,4 +1,5 @@
 -- Set the filetype to 'todo' for .todo files
+
 local systemVar = require 'vkdev.TodoList.variables.basic_variables'
 
 vim.cmd [[augroup custom_todo_week_filetypes]]
