@@ -9,13 +9,24 @@ function NewTodo()
 	print("nextnext : " .. nextNextLineContent)
 
 	if currentLineContent:find('└─ ') then
+		print("1")
 		_ModifyLineFun.ReplaceStrAt('└', '├', currentLine)
 		vim.api.nvim_buf_set_lines(0, currentLine, currentLine,false, {_SyntaxVar.end_branch_content})
 	elseif nextLineContent:find('└─ ') then
+		print("2")
 		vim.api.nvim_buf_set_lines(0, currentLine, currentLine,false, {_SyntaxVar.new_branch_content})
+	elseif currentLineContent:find('└✔ ') then
+		print("3")
+		_ModifyLineFun.ReplaceStrAt('└', '├', currentLine)
+		vim.api.nvim_buf_set_lines(0, currentLine, currentLine,false, {_SyntaxVar.end_branch_content})
 	elseif currentLineContent:find('├─ ') then
+		print("4")
+		vim.api.nvim_buf_set_lines(0, currentLine, currentLine,false, {_SyntaxVar.new_branch_content})
+	elseif currentLineContent:find('├✔ ') then
+		print("5")
 		vim.api.nvim_buf_set_lines(0, currentLine, currentLine,false, {_SyntaxVar.new_branch_content})
 	else
+		print("6")
 		for _, dayName in ipairs({
 			_SyntaxVar.day1,
 			_SyntaxVar.day2,
@@ -30,6 +41,8 @@ function NewTodo()
 			end
 		end
 	end
+	vim.api.nvim_feedkeys("j", "n", false)
+	vim.api.nvim_feedkeys("A", "n", false)
 end
 
 function BranchDone()
