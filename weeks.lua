@@ -21,18 +21,6 @@ vim.api.nvim_command("source " .. _SystemVar.modifyListLuaFilePath)
 
 --local ?
 
-local function HideDay(dayNum)
-	local dayTopStr = _NumDayEqFun.Get_Day_Top_String(dayNum)
-	local dayStr = _NumDayEqFun.Get_Day_String(dayNum)
-	local dayBotStr = _NumDayEqFun.Get_Day_Bot_String(dayNum)
-	local dayStart = _ReadDaysFun.GetDayStringLine(dayNum)
-	local dayEnd = _ReadDaysFun.GetDayListEndLine(dayNum)
-	_SyntaxFun.Hightlight_Str_In_Gray(dayTopStr)
-	_SyntaxFun.Hightlight_Str_In_Gray(dayStr)
-	_SyntaxFun.Hightlight_Str_In_Gray(dayBotStr)
-	_SyntaxFun.Fold_Between(dayStart, dayEnd)
-	print(dayStr)
-end
 
 
 local function Move_Cursor_To_Current_Day_List(dayNum) 
@@ -53,32 +41,32 @@ local function Hil(currentDay)
 
 	if currentDay == "lundi" then
 	elseif currentDay == "mardi" then
-		HideDay(1)
+		_ModifyPresentationFun.HideDay(1)
 	elseif currentDay == "mercredi" then
-		HideDay(1)
-		HideDay(2)
+		_ModifyPresentationFun.HideDay(1)
+		_ModifyPresentationFun.HideDay(2)
 	elseif currentDay == "jeudi" then
-		HideDay(1)
-		HideDay(2)
-		HideDay(3)
+		_ModifyPresentationFun.HideDay(1)
+		_ModifyPresentationFun.HideDay(2)
+		_ModifyPresentationFun.HideDay(3)
 	elseif currentDay == "vendredi" then
-		HideDay(1)
-		HideDay(2)
-		HideDay(3)
-		HideDay(4)
+		_ModifyPresentationFun.HideDay(1)
+		_ModifyPresentationFun.HideDay(2)
+		_ModifyPresentationFun.HideDay(3)
+		_ModifyPresentationFun.HideDay(4)
 	elseif currentDay == "samedi" then
-		HideDay(1)
-		HideDay(2)
-		HideDay(3)
-		HideDay(4)
-		HideDay(5)
+		_ModifyPresentationFun.HideDay(1)
+		_ModifyPresentationFun.HideDay(2)
+		_ModifyPresentationFun.HideDay(3)
+		_ModifyPresentationFun.HideDay(4)
+		_ModifyPresentationFun.HideDay(5)
 	elseif currentDay == "dimanche" then
-		HideDay(1)
-		HideDay(2)
-		HideDay(3)
-		HideDay(4)
-		HideDay(5)
-		HideDay(6)
+		_ModifyPresentationFun.HideDay(1)
+		_ModifyPresentationFun.HideDay(2)
+		_ModifyPresentationFun.HideDay(3)
+		_ModifyPresentationFun.HideDay(4)
+		_ModifyPresentationFun.HideDay(5)
+		_ModifyPresentationFun.HideDay(6)
 	else
 		print("Error in WeekDay")
 	end

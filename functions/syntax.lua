@@ -38,8 +38,8 @@ local function Hightlight_Str_In_Blue(str)
 	vim.fn.matchadd("blue", str)
 end
 
-local function Fold_Between(startLine, endLine) 
-	vim.cmd(string.format("%s,%sfo", startLine, endLine)) 
+local function Fold_Between(startLine, endLine)
+	vim.cmd(string.format("%s,%sfo", startLine, endLine))
 end
 
 local function Highlight_Current_Day_By_Num(dayNum)
