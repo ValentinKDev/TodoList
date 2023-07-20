@@ -113,7 +113,7 @@ function NextWeekTemplate()
 		dayNrInTheMonth = _NumMonthEqFun.GetMonthMaxDays(tonumber(monthNr)) + nextWeekStartDayInTheMonth
 	end
 
-	WeekTemplateInsert(dayNrInTheWeek, nextWeekStartDayInTheMonth, monthNr)
+	WeekTemplateInsert(1, nextWeekStartDayInTheMonth, monthNr)
 end
 
 function ThisWeekTemplate()

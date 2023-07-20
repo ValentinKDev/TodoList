@@ -14,9 +14,9 @@ _LineVar = require 'vkdev.TodoList.variables.line_variables'
 _Wins = require 'vkdev.TodoList.functions.windows'
 _Utils = require 'vkdev.TodoList.functions.utils'
 
-vim.api.nvim_command('source ' .. _SystemVar.keymapLuaFilePath)
-vim.api.nvim_command("source " .. _SystemVar.templateInsertLuaFilePath)
-vim.api.nvim_command("source " .. _SystemVar.modifyListLuaFilePath)
+_VIM.api.nvim_command('source ' .. _SystemVar.keymapLuaFilePath)
+_VIM.api.nvim_command("source " .. _SystemVar.templateInsertLuaFilePath)
+_VIM.api.nvim_command("source " .. _SystemVar.modifyListLuaFilePath)
 
 
 --local ?
@@ -26,7 +26,7 @@ vim.api.nvim_command("source " .. _SystemVar.modifyListLuaFilePath)
 local function Move_Cursor_To_Current_Day_List(dayNum) 
 	local line = _ReadDaysFun.GetDayListStartLine(dayNum)
 	local column = 13
-	vim.api.nvim_win_set_cursor(0, {line, column})
+	_VIM.api.nvim_win_set_cursor(0, {line, column})
 end
 
 local function Handle_current_Day(dayNum)

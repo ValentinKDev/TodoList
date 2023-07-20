@@ -1,7 +1,7 @@
 print("load functions/numer_day_eq.lua")
 --local _SyntaxVar = require 'vkdev.TodoList.variables.syntax_variables'
 
-local function DayToNum(dayX) 
+local function DayToNum(dayX)
 	local dayNum = -1
 	if dayX == "lundi" then dayNum = 1
 	elseif dayX == "mardi" then dayNum = 2
@@ -65,6 +65,6 @@ return {
 	Get_Day_String = Get_Day_String,
 	Get_Day_Top_String = Get_Day_Top_String,
 --	Get_Day_List_Start_Line = Get_Day_List_Start_Line,
-	Get_Day_List_End_Line = Get_Day_List_End_Line,
+--	Get_Day_List_End_Line = Get_Day_List_End_Line,
 }
 

@@ -8,12 +8,12 @@ local function Find(word, filePath, startLine)
 		print("File not found: " .. filePath)
 		return lineNumber
 	end
-	if (startLine < 1) then 
+	if (startLine < 1) then
 		print("Error Find startLine: " .. startLine)
 	end
 	local lineCount = 1
 	for line in file:lines() do
-		if lineCount > startLine then 
+		if lineCount > startLine then
 			if line:find(word) then
 				lineNumber = lineCount
 				break

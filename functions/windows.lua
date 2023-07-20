@@ -4,16 +4,16 @@
 local border_buf_path = _SystemVar.todoPath .. "border_buf"
 local border_buf_name = border_buf_path
 
-local calcul_width = math.floor(vim.o.columns * 0.8)
+local calcul_width = math.floor(_VIM.o.columns * 0.8)
 local width = calcul_width < 104 and calcul_width or 104
-local height = math.floor(vim.o.lines * 0.8)
-local row = math.floor((vim.o.lines - height) / 2)
-local col = math.floor((vim.o.columns - width) / 2)
+local height = math.floor(_VIM.o.lines * 0.8)
+local row = math.floor((_VIM.o.lines - height) / 2)
+local col = math.floor((_VIM.o.columns - width) / 2)
 
 local function GetBufferNumberByName(bufferName)
 	local existing_buf = -1
-	for _, bufferNumber in ipairs(vim.api.nvim_list_bufs()) do
-		if vim.api.nvim_buf_get_name(bufferNumber) == bufferName then
+	for _, bufferNumber in ipairs(_VIM.api.nvim_list_bufs()) do
+		if _VIM.api.nvim_buf_get_name(bufferNumber) == bufferName then
 			existing_buf = bufferNumber
 			break
 		end
@@ -25,9 +25,9 @@ end
 
 function OpenBorderedWindow()
 	local existing_buf = GetBufferNumberByName(border_buf_name)
-	local content_buf = existing_buf == -1 and vim.api.nvim_create_buf(false, true) or existing_buf
-	if existing_buf == -1 then vim.api.nvim_buf_set_name(content_buf, border_buf_name) end
-	local border_ns = vim.api.nvim_create_namespace("MyBorder")
+	local content_buf = existing_buf == -1 and _VIM.api.nvim_create_buf(false, true) or existing_buf
+	if existing_buf == -1 then _VIM.api.nvim_buf_set_name(content_buf, border_buf_name) end
+	local border_ns = _VIM.api.nvim_create_namespace("MyBorder")
 	local opts = {
 		style = "minimal",
 		relative = "editor",
@@ -42,14 +42,14 @@ function OpenBorderedWindow()
 		table.insert(border_lines, "║" .. string.rep(" ", width + 2) .. "║")
 	end
 	table.insert(border_lines, "╚" .. string.rep("═", width + 2) .. "╝")
-	vim.api.nvim_buf_set_lines(content_buf, 0, -1, false, border_lines)
-	local win = vim.api.nvim_open_win(content_buf, true, opts)
-	vim.api.nvim_win_set_option(win, 'winhl', 'Normal:Normal')
+	_VIM.api.nvim_buf_set_lines(content_buf, 0, -1, false, border_lines)
+	local win = _VIM.api.nvim_open_win(content_buf, true, opts)
+	_VIM.api.nvim_win_set_option(win, 'winhl', 'Normal:Normal')
 end
 
 function OpenFileInWindow(file_path)
 	local existing_buf = GetBufferNumberByName(border_buf_name)
-	local content_buf = existing_buf == -1 and vim.api.nvim_create_buf(false, true) or existing_buf
+	local content_buf = existing_buf == -1 and _VIM.api.nvim_create_buf(false, true) or existing_buf
 
 	local opts = {
 		style = "minimal",
@@ -59,11 +59,11 @@ function OpenFileInWindow(file_path)
 		row = row,
 		col = col,
 	}
-	local win = vim.api.nvim_open_win(content_buf, true, opts)
-	vim.api.nvim_command("highlight FloatBackground guibg=black")
-	vim.api.nvim_win_set_option(win, "winhighlight", "FloatBackground:NormalFloat")
-	vim.api.nvim_command("edit" .. file_path)
-	vim.api.nvim_win_set_option(win, 'winhl', 'Normal:Normal')
+	local win = _VIM.api.nvim_open_win(content_buf, true, opts)
+	_VIM.api.nvim_command("highlight FloatBackground guibg=black")
+	_VIM.api.nvim_win_set_option(win, "winhighlight", "FloatBackground:NormalFloat")
+	_VIM.api.nvim_command("edit" .. file_path)
+	_VIM.api.nvim_win_set_option(win, 'winhl', 'Normal:Normal')
 
 end
 
@@ -81,17 +81,17 @@ function CloseBorderIfFloatingWin()
 	local is_buf_floating_win = _BufferFun.IsCurrentBuffer(_SystemVar.nextTodoPath)
 	if is_buf_floating_win then
 		local bufNr = _BufferFun.GetBufferIdByName(border_buf_name)
-		vim.api.nvim_buf_delete(bufNr, { force = true })
+		_VIM.api.nvim_buf_delete(bufNr, { force = true })
 	end
 end
 
-vim.cmd [[augroup custom_todo_file_quiting]]
-vim.cmd [[autocmd!]]
-vim.cmd [[autocmd BufLeave * lua CloseBorderIfFloatingWin()]]
-vim.cmd [[autocmd BufLeave, BufWinLeave, BufWipeout next setfiletype monthtodo]]
-vim.cmd [[augroup END]]
+_VIM.cmd [[augroup custom_todo_file_quiting]]
+_VIM.cmd [[autocmd!]]
+_VIM.cmd [[autocmd BufLeave * lua CloseBorderIfFloatingWin()]]
+_VIM.cmd [[autocmd BufLeave, BufWinLeave, BufWipeout next setfiletype monthtodo]]
+_VIM.cmd [[augroup END]]
 
-vim.cmd[[ command! -nargs=0 TodoBorderWindow :lua OpenBorderedWindow()]]
-vim.cmd[[ command! -nargs=0 OpenListTodoThings :lua OpenWindowForListOfTodoThing()]]
-vim.cmd[[ command! -nargs=0 OpenHelpWindow :lua OpenWindowHelpTodoCommands()]]
-vim.cmd[[ command! -nargs=0 TodoHelp :lua TodoHelp()]]
+_VIM.cmd[[ command! -nargs=0 TodoBorderWindow :lua OpenBorderedWindow()]]
+_VIM.cmd[[ command! -nargs=0 OpenListTodoThings :lua OpenWindowForListOfTodoThing()]]
+_VIM.cmd[[ command! -nargs=0 OpenHelpWindow :lua OpenWindowHelpTodoCommands()]]
+_VIM.cmd[[ command! -nargs=0 TodoHelp :lua TodoHelp()]]

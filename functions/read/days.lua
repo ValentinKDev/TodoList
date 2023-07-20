@@ -1,5 +1,5 @@
 local function GetDayStringLine(dayNum)
-	local line = ""
+	local line = -1
 	if (dayNum == 1) then line = _LineVar.day1Line
 	elseif dayNum == 2 then line = _LineVar.day2Line
 	elseif dayNum == 3 then line = _LineVar.day3Line
@@ -7,13 +7,6 @@ local function GetDayStringLine(dayNum)
 	elseif dayNum == 5 then line = _LineVar.day5Line
 	elseif dayNum == 6 then line = _LineVar.day6Line
 	elseif dayNum == 7 then line = _LineVar.day7Line
---	if (dayNum == 1) then line = _Day1Line
---	elseif dayNum == 2 then line = _Day2Line
---	elseif dayNum == 3 then line = _Day3Line
---	elseif dayNum == 4 then line = _Day4Line
---	elseif dayNum == 5 then line = _Day5Line
---	elseif dayNum == 6 then line = _Day6Line
---	elseif dayNum == 7 then line = _Day7Line
 	else print("Error in Get_Day_String_Line")
 	end
 	return line

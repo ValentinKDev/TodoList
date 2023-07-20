@@ -1,45 +1,45 @@
 --local _NumDayEqFun = require 'vkdev.TodoList.functions.number_day_eq'
 
-vim.fn.matchadd("yellow2", "SEMAINE")
-vim.fn.matchadd("yellow2", "#")
-vim.fn.matchadd("yellow3", "═")
-vim.fn.matchadd("yellow3", "║")
-vim.fn.matchadd("yellow3", "╠")
-vim.fn.matchadd("yellow3", "╔")
-vim.fn.matchadd("yellow3", "╚")
-vim.fn.matchadd("yellow3", "╗")
-vim.fn.matchadd("yellow3", "╝")
+_VIM.fn.matchadd("yellow2", "SEMAINE")
+_VIM.fn.matchadd("yellow2", "#")
+_VIM.fn.matchadd("yellow3", "═")
+_VIM.fn.matchadd("yellow3", "║")
+_VIM.fn.matchadd("yellow3", "╠")
+_VIM.fn.matchadd("yellow3", "╔")
+_VIM.fn.matchadd("yellow3", "╚")
+_VIM.fn.matchadd("yellow3", "╗")
+_VIM.fn.matchadd("yellow3", "╝")
 
-vim.api.nvim_set_hl(0, "red", {fg='#aa0000' ,bg='#202020'})
-vim.api.nvim_set_hl(0, "green", {fg='#00aa00'})
-vim.api.nvim_set_hl(0, "yellow", {fg='#707000'})
-vim.api.nvim_set_hl(0, "blue", {fg='#0070aa', bold=true})
-vim.api.nvim_set_hl(0, "blueTop", {fg='#0070aa', bold=true})
-vim.api.nvim_set_hl(0, "blueBot", {fg='#0070aa', bold=true})
-vim.api.nvim_set_hl(0, "grayToHide", {fg='#656565'})
-vim.api.nvim_set_hl(0, "yellow2", {fg='#bbaa00'})
-vim.api.nvim_set_hl(0, "yellow3", {fg='#988500'})
-vim.api.nvim_set_hl(0, "CursorLineNr", {bold=true, bg=Gray})
+_VIM.api.nvim_set_hl(0, "red", {fg='#aa0000' ,bg='#202020'})
+_VIM.api.nvim_set_hl(0, "green", {fg='#00aa00'})
+_VIM.api.nvim_set_hl(0, "yellow", {fg='#707000'})
+_VIM.api.nvim_set_hl(0, "blue", {fg='#0070aa', bold=true})
+_VIM.api.nvim_set_hl(0, "blueTop", {fg='#0070aa', bold=true})
+_VIM.api.nvim_set_hl(0, "blueBot", {fg='#0070aa', bold=true})
+_VIM.api.nvim_set_hl(0, "grayToHide", {fg='#656565'})
+_VIM.api.nvim_set_hl(0, "yellow2", {fg='#bbaa00'})
+_VIM.api.nvim_set_hl(0, "yellow3", {fg='#988500'})
+_VIM.api.nvim_set_hl(0, "CursorLineNr", {bold=true, bg=Gray})
 
-vim.cmd[[ hi Folded guifg=#656565 guibg=#282828 ]]
-vim.cmd[[ hi FoldColumn guibg=#050505 ]]
-vim.cmd[[ hi DoneBranch guifg=#555555]]
---vim.cmd[[ hi NoneBranch guifg=#852510]]
---vim.cmd[[ match NoneBranch /\s*\p✕.*\Z/ ]]
---vim.cmd[[ match NoneBranch /\s*\px.*\Z/ ]]
-vim.cmd[[ match DoneBranch /\s*\p✔.*\Z/ ]]
+_VIM.cmd[[ hi Folded guifg=#656565 guibg=#282828 ]]
+_VIM.cmd[[ hi FoldColumn guibg=#050505 ]]
+_VIM.cmd[[ hi DoneBranch guifg=#555555]]
+--_VIM.cmd[[ hi NoneBranch guifg=#852510]]
+--_VIM.cmd[[ match NoneBranch /\s*\p✕.*\Z/ ]]
+--_VIM.cmd[[ match NoneBranch /\s*\px.*\Z/ ]]
+_VIM.cmd[[ match DoneBranch /\s*\p✔.*\Z/ ]]
 
 --local ?
 local function Hightlight_Str_In_Gray(str)
-	vim.fn.matchadd("grayToHide", str)
+	_VIM.fn.matchadd("grayToHide", str)
 end
 
 local function Hightlight_Str_In_Blue(str)
-	vim.fn.matchadd("blue", str)
+	_VIM.fn.matchadd("blue", str)
 end
 
 local function Fold_Between(startLine, endLine)
-	vim.cmd(string.format("%s,%sfo", startLine, endLine))
+	_VIM.cmd(string.format("%s,%sfo", startLine, endLine))
 end
 
 local function Highlight_Current_Day_By_Num(dayNum)
