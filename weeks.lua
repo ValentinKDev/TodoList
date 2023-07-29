@@ -6,22 +6,17 @@ _ReadDaysFun = require 'vkdev.TodoList.functions.read.days'
 _ModifyPresentationFun = require 'vkdev.TodoList.functions.modify.presentation'
 _ReadFun = require 'vkdev.TodoList.functions.read.file'
 _ModifyLineFun = require 'vkdev.TodoList.functions.modify.line'
-_BufferFun = require 'vkdev.TodoList.functions.buffers'
+_BufferFun = require 'vkdev.TodoList.functions.window.buffers'
 _SyntaxFun = require 'vkdev.TodoList.functions.syntax'
 _NumDayEqFun = require 'vkdev.TodoList.functions.number_day_eq'
 _NumMonthEqFun = require 'vkdev.TodoList.functions.number_month_eq'
 _LineVar = require 'vkdev.TodoList.variables.line_variables'
-_Wins = require 'vkdev.TodoList.functions.windows'
+_Wins = require 'vkdev.TodoList.functions.window.windows'
 _Utils = require 'vkdev.TodoList.functions.utils'
 
 _VIM.api.nvim_command('source ' .. _SystemVar.keymapLuaFilePath)
 _VIM.api.nvim_command("source " .. _SystemVar.templateInsertLuaFilePath)
 _VIM.api.nvim_command("source " .. _SystemVar.modifyListLuaFilePath)
-
-
---local ?
-
-
 
 local function Move_Cursor_To_Current_Day_List(dayNum) 
 	local line = _ReadDaysFun.GetDayListStartLine(dayNum)

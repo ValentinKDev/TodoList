@@ -1,7 +1,9 @@
 local todoPath = "/home/vkdev/.todo/"
 local weekDir = "week/"
+local monthDir = "month/"
 local weekTemplate = todoPath .. weekDir .. "week_template"
-local weekTodoPath = todoPath .. "week.todo"
+local weekTodoPath = todoPath .. weekDir .. "week.todo"
+local monthTodoPath = todoPath .. monthDir .. "month.todo"
 local nextTodoPath = todoPath .. "next"
 
 local TodoPlugPath = "/home/vkdev/.config/nvim/lua/vkdev/TodoList/"
@@ -20,23 +22,11 @@ local dayNrInTheMonth = os.date("%d")
 local monthNr = os.date("%m")
 local monthName = os.date("%B")
 
---[[local NumDayEqFun = require 'vkdev.TodoList.functions.number_day_eq'
-
-local stt = (NumDayEqFun.DayToNum(weekDay))
-print("stt : " .. stt)
-local str = dayNr
-print("str : " .. str)
-local startNr = dayNr - (NumDayEqFun.DayToNum(weekDay) - 1)
-print("startNr : " .. startNr)
-local startStr = ""
-if startNr < 10 then startStr = "0" .. startNr else startStr = startStr end
-print("startStr : " .. startStr)
-]]
-
 return {
 	nextTodoPath = nextTodoPath,
 	todoPath = todoPath,
 	weekTodoPath = weekTodoPath,
+	monthTodoPath = monthTodoPath,
 	weekDay = weekDay,
 	monthNr = monthNr,
 	dayNrInTheMonth = dayNrInTheMonth,

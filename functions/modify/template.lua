@@ -1,7 +1,4 @@
 print("load functions/modify/template.lua")
---local _NumMonthEqFun = require 'vkdev.TodoList.functions.number_month_eq'
---local _SystemVar = require 'vkdev.TodoList.variables.basic_variables'
---local _ModifyLineFun = require 'vkdev.TodoList.functions.modify.line'
 
 -- [[
 -- Function to insert a new week day by day template and fill or replace "XX" "MMMM" "|" ";" "," 
@@ -12,16 +9,20 @@ local function WeekTemplateInsert(dayNrInTheWeek, dayNrInTheMonth, monthNr)
 	local monthName = _SystemVar.monthName
 
 	local file = io.open(weekTemplate, "r")
+	if file == nil then
+		print("Failed to open source file: " .. weekTemplate)
+		return
+	end
 	if not weekTemplate then
 		print("Failed to open source file: " .. weekTemplate)
 		return
 	end
 	local startLineNumber = 10
-	local line_count = 1
+	local lineCount = 1
 	for line in file:lines() do
-		line_count = line_count + 1
-		local lineNumber = startLineNumber + line_count
-		vim.api.nvim_buf_set_lines(0, lineNumber , lineNumber, false, {line})
+		lineCount = lineCount + 1
+		local lineNumber = startLineNumber + lineCount
+		_VIM.api.nvim_buf_set_lines(0, lineNumber , lineNumber, false, {line})
 	end
 	file:close()
 
@@ -43,8 +44,6 @@ local function WeekTemplateInsert(dayNrInTheWeek, dayNrInTheMonth, monthNr)
 	_ModifyLineFun.ReplaceStrAt("XX", startStr, 15)
 
 	local startMonth = minusMonth and _NumMonthEqFun.GetMonthName(monthNr) or monthName
---	print("monthNr : " .. monthNr)
---	print("startmonth len : " .. startMonth:len())
 	_ModifyLineFun.ReplaceStrAt("MMMMM", startMonth, 15)
 
 	local nrStartSyntax = "━"
@@ -100,7 +99,7 @@ local function WeekTemplateInsert(dayNrInTheWeek, dayNrInTheMonth, monthNr)
 	_ModifyLineFun.ReplaceStrAt("|", nrMidSyntax, 15)
 	_ModifyLineFun.ReplaceStrAt("|", nrBotEndSyntax, 16)
 	
-	vim.api.nvim_win_set_cursor(0, {15,0})
+	_VIM.api.nvim_win_set_cursor(0, {15,0})
 end
 
 function NextWeekTemplate()
@@ -120,5 +119,5 @@ function ThisWeekTemplate()
 	WeekTemplateInsert(_SystemVar.dayNrInTheWeek, _SystemVar.dayNrInTheMonth, _SystemVar.monthNr)
 end
 
-vim.cmd[[ command! -nargs=0 TodoThisWeekTemplate :lua ThisWeekTemplate()]]
-vim.cmd[[ command! -nargs=0 TodoNextWeekTemplate :lua NextWeekTemplate()]]
+_VIM.cmd[[ command! -nargs=0 TodoThisWeekTemplate :lua ThisWeekTemplate()]]
+_VIM.cmd[[ command! -nargs=0 TodoNextWeekTemplate :lua NextWeekTemplate()]]

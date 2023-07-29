@@ -19,7 +19,7 @@ local function GetBufferNumberByName(bufferName)
 		end
 	end
 
-	print("GetBufferNumberByName() : " .. existing_buf)
+--	print("GetBufferNumberByName() : " .. existing_buf)
 	return existing_buf
 end
 
@@ -67,6 +67,13 @@ function OpenFileInWindow(file_path)
 
 end
 
+local windowsBufNames = {
+	_SystemVar.nextTodoPath,
+	_SystemVar.keymapLuaFilePath,
+	_SystemVar.monthTodoPath,
+}
+
+
 function OpenWindowForListOfTodoThing()
 	OpenBorderedWindow()
 	OpenFileInWindow(_SystemVar.nextTodoPath)
@@ -77,9 +84,20 @@ function OpenWindowHelpTodoCommands()
 	OpenFileInWindow(_SystemVar.keymapLuaFilePath)
 end
 
+function OpenWindowMonthsTodo()
+	OpenBorderedWindow()
+	OpenFileInWindow(_SystemVar.monthTodoPath)
+end
+
 function CloseBorderIfFloatingWin()
-	local is_buf_floating_win = _BufferFun.IsCurrentBuffer(_SystemVar.nextTodoPath)
-	if is_buf_floating_win then
+	local isBufFloatingWin = false
+	for _, name in ipairs(windowsBufNames) do
+		if _BufferFun.IsCurrentBuffer(name) then
+			isBufFloatingWin = true
+			break
+		end
+	end
+	if isBufFloatingWin then
 		local bufNr = _BufferFun.GetBufferIdByName(border_buf_name)
 		_VIM.api.nvim_buf_delete(bufNr, { force = true })
 	end
@@ -94,4 +112,5 @@ _VIM.cmd [[augroup END]]
 _VIM.cmd[[ command! -nargs=0 TodoBorderWindow :lua OpenBorderedWindow()]]
 _VIM.cmd[[ command! -nargs=0 OpenListTodoThings :lua OpenWindowForListOfTodoThing()]]
 _VIM.cmd[[ command! -nargs=0 OpenHelpWindow :lua OpenWindowHelpTodoCommands()]]
+_VIM.cmd[[ command! -nargs=0 TodoMonthWindow :lua OpenWindowMonthsTodo()]]
 _VIM.cmd[[ command! -nargs=0 TodoHelp :lua TodoHelp()]]
