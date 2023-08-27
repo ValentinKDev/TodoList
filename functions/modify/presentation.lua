@@ -31,8 +31,16 @@ local function HideDay(dayNum)
 	print(dayStr)
 end
 
+local function HideDaysTo(toDayNum) 
+	local i = 1
+	while i < toDayNum do 
+		HideDay(i)
+		i = i + 1
+	end
+end
 
 return {
 	Current_Day_Outline_to_Bold = Current_Day_Outline_to_Bold,
 	HideDay = HideDay,
+	HideDaysTo = HideDaysTo,
 }

@@ -1,2 +1,2 @@
-print("    │  ├ todo_plug")
+print("    └ todo_plug")
 require("vkdev.TodoList.todo")

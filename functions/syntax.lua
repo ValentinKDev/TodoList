@@ -43,9 +43,13 @@ local function Fold_Between(startLine, endLine)
 end
 
 local function Highlight_Current_Day_By_Num(dayNum)
+	print("Highlight_Current_Day_By_Num " .. dayNum)
 	local dayTopStr = _NumDayEqFun.Get_Day_Top_String(dayNum)
 	local dayStr = _NumDayEqFun.Get_Day_String(dayNum)
 	local dayBotStr = _NumDayEqFun.Get_Day_Bot_String(dayNum)
+	print(dayTopStr)
+	print(dayStr)
+	print(dayBotStr)
 	Hightlight_Str_In_Blue(dayStr)
 	Hightlight_Str_In_Blue(dayTopStr)
 	Hightlight_Str_In_Blue(dayBotStr)

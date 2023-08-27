@@ -2,6 +2,7 @@ print("load weeks.lua")
 
 _SystemVar = require 'vkdev.TodoList.variables.basic_variables'
 _SyntaxVar = require 'vkdev.TodoList.variables.syntax_variables'
+_NamesVar = require 'vkdev.TodoList.variables.daysName_variables'
 _ReadDaysFun = require 'vkdev.TodoList.functions.read.days'
 _ModifyPresentationFun = require 'vkdev.TodoList.functions.modify.presentation'
 _ReadFun = require 'vkdev.TodoList.functions.read.file'
@@ -26,44 +27,16 @@ end
 
 local function Handle_current_Day(dayNum)
 	_SyntaxFun.Highlight_Current_Day_By_Num(dayNum)
+	--day outline to bold should be checked whith a loop to the current day
 	_ModifyPresentationFun.Current_Day_Outline_to_Bold(dayNum)
 	Move_Cursor_To_Current_Day_List(dayNum)
 end
-
 local function Hil(currentDay)
-	local dayNum = _NumDayEqFun.DayToNum(currentDay)
+	local dayNum = tonumber(_SystemVar.dayNrInTheWeek)
+	print("Hil weekday : " .. dayNum)
 	Handle_current_Day(dayNum)
-
-	if currentDay == "lundi" then
-	elseif currentDay == "mardi" then
-		_ModifyPresentationFun.HideDay(1)
-	elseif currentDay == "mercredi" then
-		_ModifyPresentationFun.HideDay(1)
-		_ModifyPresentationFun.HideDay(2)
-	elseif currentDay == "jeudi" then
-		_ModifyPresentationFun.HideDay(1)
-		_ModifyPresentationFun.HideDay(2)
-		_ModifyPresentationFun.HideDay(3)
-	elseif currentDay == "vendredi" then
-		_ModifyPresentationFun.HideDay(1)
-		_ModifyPresentationFun.HideDay(2)
-		_ModifyPresentationFun.HideDay(3)
-		_ModifyPresentationFun.HideDay(4)
-	elseif currentDay == "samedi" then
-		_ModifyPresentationFun.HideDay(1)
-		_ModifyPresentationFun.HideDay(2)
-		_ModifyPresentationFun.HideDay(3)
-		_ModifyPresentationFun.HideDay(4)
-		_ModifyPresentationFun.HideDay(5)
-	elseif currentDay == "dimanche" then
-		_ModifyPresentationFun.HideDay(1)
-		_ModifyPresentationFun.HideDay(2)
-		_ModifyPresentationFun.HideDay(3)
-		_ModifyPresentationFun.HideDay(4)
-		_ModifyPresentationFun.HideDay(5)
-		_ModifyPresentationFun.HideDay(6)
-	else
-		print("Error in WeekDay")
+	if dayNum > 1 then
+		_ModifyPresentationFun.HideDaysTo(dayNum)
 	end
 end
 

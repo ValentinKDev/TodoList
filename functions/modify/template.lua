@@ -27,9 +27,6 @@ local function WeekTemplateInsert(dayNrInTheWeek, dayNrInTheMonth, monthNr)
 	file:close()
 
 	local startNr = dayNrInTheMonth - (dayNrInTheWeek - 1)
-	print("startNr : " .. startNr)
-	print("dayMonth : " .. dayNrInTheMonth)
-	print("dayNrInTheWeek : " .. dayNrInTheWeek)
 	local startStr = ""
 	local minusMonth = false
 	if startNr < 10 then
@@ -80,8 +77,8 @@ local function WeekTemplateInsert(dayNrInTheWeek, dayNrInTheMonth, monthNr)
 		nrEndSyntax = nrEndSyntax .. "━"
 		i = i + 1
 	end
-	_ModifyLineFun.ReplaceStrAt(",", nrStartSyntax, 14)
-	_ModifyLineFun.ReplaceStrAt(",", nrStartSyntax, 16)
+	_ModifyLineFun.ReplaceStrAt(",", nrEndSyntax, 14)
+	_ModifyLineFun.ReplaceStrAt(",", nrEndSyntax, 16)
 
 	local nrMidSyntax = ""
 	local nrBotEndSyntax = ""
