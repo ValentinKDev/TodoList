@@ -17,6 +17,7 @@ _VIM.cmd [[augroup custom_todo_week_filetypes2]]
 _VIM.cmd [[autocmd!]]
 _VIM.cmd [[autocmd BufRead,BufNewFile month.todo setfiletype monthtodo]]
 _VIM.cmd [[augroup END]]
+
 _VIM.cmd [[augroup custom_todo_months_syntax2]]
 _VIM.cmd [[autocmd!]]
 _VIM.api.nvim_command('autocmd FileType weektodo source ' .. systemVar.monthLuaFilePath)

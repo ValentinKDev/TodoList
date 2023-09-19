@@ -35,7 +35,9 @@ local function Hil(currentDay)
 	local dayNum = tonumber(_SystemVar.dayNrInTheWeek)
 	print("Hil weekday : " .. dayNum)
 	Handle_current_Day(dayNum)
-	if dayNum > 1 then
+	if dayNum == 1 then
+		_ModifyPresentationFun.HideDaysTo(6)
+	elseif dayNum > 1 then
 		_ModifyPresentationFun.HideDaysTo(dayNum)
 	end
 end

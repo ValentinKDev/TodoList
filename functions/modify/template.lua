@@ -26,6 +26,8 @@ local function WeekTemplateInsert(dayNrInTheWeek, dayNrInTheMonth, monthNr)
 	end
 	file:close()
 
+	local i = 0
+
 	local startNr = dayNrInTheMonth - (dayNrInTheWeek - 1)
 	local startStr = ""
 	local minusMonth = false
@@ -43,15 +45,15 @@ local function WeekTemplateInsert(dayNrInTheWeek, dayNrInTheMonth, monthNr)
 	local startMonth = minusMonth and _NumMonthEqFun.GetMonthName(monthNr) or monthName
 	_ModifyLineFun.ReplaceStrAt("MMMMM", startMonth, 15)
 
-	local nrStartSyntax = "━"
-	local i = 0
+	local startMonthOutlineSymbol = "━"
 	local startMonthLen = tonumber(startMonth:len())
-	while i < startMonthLen do
-		nrStartSyntax = nrStartSyntax .. "━"
-		i = i + 1
+	local startMonthOutlineLen = 4 + 1 + 2 + 2 + 1 + startMonthLen - 1 + 2 + 1 + 4 -1
+	for j = 1, startMonthOutlineLen, 1 do 
+		startMonthOutlineSymbol = startMonthOutlineSymbol .. "━"
 	end
-	_ModifyLineFun.ReplaceStrAt(";", nrStartSyntax, 14)
-	_ModifyLineFun.ReplaceStrAt(";", nrStartSyntax, 16)
+	_ModifyLineFun.ReplaceStrAt(";", startMonthOutlineSymbol, 14)
+	_ModifyLineFun.ReplaceStrAt(";", startMonthOutlineSymbol, 16)
+	print("start len : " .. startMonthLen)
 
 
 	local plusMonth = false
@@ -66,31 +68,29 @@ local function WeekTemplateInsert(dayNrInTheWeek, dayNrInTheMonth, monthNr)
 	else
 		endStr = endNr
 	end
+
+	if tonumber(endStr) < 10 then endStr = "0"..endStr end
 	_ModifyLineFun.ReplaceStrAt("YY", endStr, 15)
 	local endMonth = plusMonth and _NumMonthEqFun.GetMonthName(tonumber(monthNr) + 1) or monthName
 	_ModifyLineFun.ReplaceStrAt("mmmmm", endMonth, 15)
 
-	local nrEndSyntax = "━"
-	i = 0
+	local endMonthOutlineSymbol = "━"
 	local endMonthLen = tonumber(endMonth:len())
-	while i < endMonthLen do
-		nrEndSyntax = nrEndSyntax .. "━"
-		i = i + 1
+	local endMonthOutlineLen = 4 + 1 + 2 + 2 + 1 + endMonthLen - 1 + 2 + 1 + 4
+	for j = 1, endMonthOutlineLen, 1 do 
+		endMonthOutlineSymbol = endMonthOutlineSymbol .. "━"
 	end
-	_ModifyLineFun.ReplaceStrAt(",", nrEndSyntax, 14)
-	_ModifyLineFun.ReplaceStrAt(",", nrEndSyntax, 16)
+	_ModifyLineFun.ReplaceStrAt(",", endMonthOutlineSymbol, 14)
+	_ModifyLineFun.ReplaceStrAt(",", endMonthOutlineSymbol, 16)
 
+	local nrTopEndSyntax = ""
 	local nrMidSyntax = ""
 	local nrBotEndSyntax = ""
-	local nrTopEndSyntax = ""
-	local len = 28
-	len = len - startMonthLen - endMonthLen
-	i = 0
-	while i < len do
+	local len = 1 + 142 - 123 + 2 * 4 - startMonthLen - endMonthLen
+	for j = 1, len, 1 do 
 		nrMidSyntax = nrMidSyntax .. "═"
 		nrBotEndSyntax = nrBotEndSyntax .. " "
 		nrTopEndSyntax = nrTopEndSyntax .. ":"
-		i = i + 1
 	end
 	_ModifyLineFun.ReplaceStrAt("|", nrTopEndSyntax, 14)
 	_ModifyLineFun.ReplaceStrAt("|", nrMidSyntax, 15)
