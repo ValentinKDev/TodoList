@@ -12,6 +12,9 @@ function NewTodo()
 		print("1")
 		_ModifyLineFun.ReplaceStrAt('└', '├', currentLine)
 		vim.api.nvim_buf_set_lines(0, currentLine, currentLine,false, {_SyntaxVar.end_branch_content})
+	elseif nextLineContent:find('├─ ') then
+		print("2")
+		vim.api.nvim_buf_set_lines(0, currentLine, currentLine,false, {_SyntaxVar.new_branch_content})
 	elseif nextLineContent:find('└─ ') then
 		print("2")
 		vim.api.nvim_buf_set_lines(0, currentLine, currentLine,false, {_SyntaxVar.new_branch_content})
