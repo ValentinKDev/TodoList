@@ -28,7 +28,8 @@ end
 local function Handle_current_Day(dayNum)
 	_SyntaxFun.Highlight_Current_Day_By_Num(dayNum)
 	--day outline to bold should be checked whith a loop to the current day
-	_ModifyPresentationFun.Current_Day_Outline_to_Bold(dayNum)
+	--_ModifyPresentationFun.Current_Day_Outline_to_Bold(dayNum)
+	_ModifyPresentationFun.ReplaceOutlineToDayLine(dayNum)
 	Move_Cursor_To_Current_Day_List(dayNum)
 end
 local function Hil(currentDay)
