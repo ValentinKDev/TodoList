@@ -1,4 +1,5 @@
-_VIM.keymap.set("n", "<Leader>tn", ":TodoNew<CR>")
+_VIM.keymap.set("n", "<Leader>tN", ":TodoNewBefore<CR>")
+_VIM.keymap.set("n", "<Leader>tn", ":TodoNewNext<CR>")
 _VIM.keymap.set("n", "<Leader>td", ":TodoDone<CR>")
 _VIM.keymap.set("n", "<Leader>tt", ":TodoBorderWindow<CR>")
 _VIM.keymap.set("n", "<Leader>tb", ":TodoBuffers<CR>")
