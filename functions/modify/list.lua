@@ -9,14 +9,19 @@ function NewTodoPrecedentLine()
 	local precedentLineContent = vim.api.nvim_buf_get_lines(buffer, currentLine - 2, currentLine - 1, false)[1]
 	local beforePrecedentLineContent = vim.api.nvim_buf_get_lines(buffer, currentLine - 3, currentLine - 2, false)[1]
 
-	if precedentLineContent:find('└─┬ ') or precedentLineContent:find('┗━┯') then
+	print("precedentLine : " .. precedentLineContent)
+	if precedentLineContent:find('└─┬') or precedentLineContent:find('┗━┯') then
+		print("1")
 		vim.api.nvim_buf_set_lines(0, precedentLine, precedentLine, false, {_SyntaxVar.new_branch_content})
 	elseif precedentLineContent:find('├─ ') then
+		print("2")
 		vim.api.nvim_buf_set_lines(0, precedentLine, precedentLine, false, {_SyntaxVar.new_branch_content})
 	elseif precedentLineContent:find('└─ ') then
+		print("3")
 		_ModifyLineFun.ReplaceStrAt('└', '├', precedentLine)
 		vim.api.nvim_buf_set_lines(0, precedentLine, precedentLine, false, {_SyntaxVar.end_branch_content})
 	else
+		print("4")
 		stop = true
 	end
 
