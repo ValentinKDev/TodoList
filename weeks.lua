@@ -21,6 +21,7 @@ _VIM.api.nvim_command("source " .. _SystemVar.modifyListLuaFilePath)
 
 local function Move_Cursor_To_Current_Day_List(dayNum) 
 	local line = _ReadDaysFun.GetDayListStartLine(dayNum)
+	print("Move_Cursor_To_Current_Day_List - line = " .. line)
 	local column = 13
 	_VIM.api.nvim_win_set_cursor(0, {line, column})
 end
@@ -36,10 +37,13 @@ local function Hil(currentDay)
 	local dayNum = tonumber(_SystemVar.dayNrInTheWeek)
 	print("Hil weekday : " .. dayNum)
 	Handle_current_Day(dayNum)
-	if dayNum == 1 then
-		_ModifyPresentationFun.HideDaysTo(6)
-	elseif dayNum > 1 then
+--	if dayNum == 1 then
+--		_ModifyPresentationFun.HideDaysTo(6)
+--	elseif dayNum > 1 then
+	if dayNum > 1 then
 		_ModifyPresentationFun.HideDaysTo(dayNum)
+	elseif dayNum == 0 then
+		_ModifyPresentationFun.HideDaysTo(7)
 	end
 end
 
